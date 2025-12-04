@@ -1,13 +1,10 @@
 import socket
 import logging
 import os
+from datetime import datetime
 
 # Logging configuration
-logging.basicConfig(
-    filename = "portscans.log", # Where to write results
-    level = logging.INFO, # What level of results to log
-    format = "%(asctime)s - %(levelname)s - %(message)s" 
-    )
+
 
 def clear_console():
     if os.name == 'nt':
@@ -16,6 +13,14 @@ def clear_console():
         os.system('clear')
 
 def Port_Scanner(IP, start_Port, end_Port): # Function for scanning a range of ports
+    time = datetime.now().strftime("%d-%m-%Y_%H-%M-%S") # String formatting the time for filename
+    
+    logging.basicConfig(
+    filename = f"{time} portscans.log", # Filename
+    level = logging.INFO, # What level of results to log
+    format = "%(asctime)s - %(levelname)s - %(message)s" 
+    )
+
     # For loop to go through each port in a range
     for port in range(start_Port, end_Port + 1):
         # Configuring the socket
